@@ -13,9 +13,14 @@ const composeEnhancers =
             // Specify extension's options like name, actionsBlacklist, actionsCreators, serialize...
         }) : compose;
 
-const rootEnhancer = composeEnhancers(
+const enhancer = composeEnhancers(
     applyMiddleware(...middleware),
     // other store enhancers if any
+);
+
+const rootEnhancer = compose(
+    applyMiddleware(...middleware),
+    window.devToolsExtension && window.devToolsExtension()
 );
 
 /**
