@@ -6,28 +6,14 @@ const initialState = {};
 
 const middleware = [thunk];
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const enhancer = composeEnhancers(
+const rootEnhancer = composeEnhancers(
     applyMiddleware(...middleware),
     // other store enhancers if any
 );
 
-const rootEnhancer = compose(
-    applyMiddleware(...middleware),
-    window.devToolsExtension && window.devToolsExtension()
-);
-
-/**
- * 
- * const composeEnhancers =
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE ?
-        window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE({
-            // Specify extension's options like name, actionsBlacklist, actionsCreators, serialize...
-        }) : compose;
-
+/** This setup of the Redux Devtools extension causes the app to not load when the extension is not installed in the browser. The above is the workaround.
 
 const store = createStore(
     rootReducer,
@@ -37,12 +23,13 @@ const store = createStore(
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
- */
+
+*/
 
 const store = createStore(
     rootReducer,
     initialState,
-    enhancer
+    rootEnhancer
 )
 
 
