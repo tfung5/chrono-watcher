@@ -8,7 +8,7 @@ const keys = require("../../config/keys");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
-// Load user model
+// Load User model
 const User = require("../../models/User");
 
 // Register endpoint

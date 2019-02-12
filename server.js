@@ -1,12 +1,20 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const passport = require("passport");
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 const path = require('path');
 
-const users = require("./routes/api/users");
-
 const app = express();
+
+// Port Setup
+const port = process.env.PORT || 5000;
+
+// DB Config
+const db = require('./config/keys').mongoURI;
+
+// Obtain routes
+const users = require('./routes/api/users');
+const activities = require('./routes/api/activities');
 
 // Bodyparser middleware
 app.use(
@@ -16,8 +24,9 @@ app.use(
 );
 app.use(bodyParser.json());
 
-// DB Config
-const db = require("./config/keys").mongoURI;
+// Use routes
+app.use('/api/users', users);
+app.use('/api/activities', activities);
 
 // Connect to MongoDB
 mongoose
@@ -25,19 +34,21 @@ mongoose
         db,
         { useNewUrlParser: true }
     )
-    .then( () => console.log("MongoDB successfully connected") )
+    .then( () => console.log('MongoDB successfully connected') )
     .catch( err => console.log(err) );
+
+
+// Promise
+mongoose.Promise = global.Promise;
 
 // Passport middleware
 app.use(passport.initialize());
 
 // Passport config
-require("./config/passport")(passport);
+require('./config/passport')(passport);
 
-// Routes
-app.use("/api/users", users);
-
-// Server statis assets if in production
+// Heroku post-build script
+// Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
     app.use(express.static('client/build'));
@@ -46,6 +57,5 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const port = process.env.PORT || 5000;
-
+// Server start
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

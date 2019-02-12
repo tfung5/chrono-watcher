@@ -11,6 +11,27 @@ class Navbar extends Component {
                             <i className="material-icons">code</i>
                             MERN
                         </Link>
+                        <Link to="/register"
+                        style={{
+                            width: "150px",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px"
+                        }}
+                        className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                        >
+                        Register
+                        </Link>
+                        <Link to="/login"
+                        style={{
+                            marginRight: "2rem",
+                            width: "150px",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px"
+                        }}
+                        className="btn btn-large waves-effect white hoverable black-text"
+                        >
+                        Log In
+                        </Link>
                     </div>
                 </nav>
             </div>

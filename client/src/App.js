@@ -13,6 +13,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import Timeline from './components/timeline/Timeline';
 
 import './App.css';
 
@@ -44,7 +45,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path ="/" component={Landing} />
+            <Route exact path ="/" component={Timeline} />
             <Route exact path ="/register" component={Register} />
             <Route exact path ="/login" component={Login} />
             <Switch>

@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/tfung5/chrono-watcher.git"
   },
-  "author": "",
+  "author": "Tony Fung",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tfung5/chrono-watcher/issues"

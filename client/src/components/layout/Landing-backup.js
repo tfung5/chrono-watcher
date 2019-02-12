@@ -7,8 +7,6 @@ class Landing extends Component {
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
-            <h4>Chrono Watcher</h4>
-            <text type="text">What did you do for the past 60 minutes?</text>
             <h4>
               <b>Build</b> a login/auth app with the{" "}
               <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
