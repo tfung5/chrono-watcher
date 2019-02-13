@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import { Container } from "reactstrap";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 //import Landing from "./components/layout/Landing";
-import Navbar from "./components/layout/Navbar";
+import AppNavbar from "./components/layout/AppNavbar";
+//import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Activity from './components/activity/Activity';
-
-import './App.css';
+import Activity from "./components/activity/Activity";
+import ActivityModal from "./components/activity/ActivityModal";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -35,8 +39,7 @@ if (localStorage.jwtToken) {
     // Redirect to login
     window.location.href = "./login";
   }
-}
-
+} // End checking for token
 
 class App extends Component {
   render() {
@@ -44,17 +47,19 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Navbar />
-            <Route exact path ="/" component={Activity} />
-            <Route exact path ="/register" component={Register} />
-            <Route exact path ="/login" component={Login} />
+            <AppNavbar />
+            <Container>
+              <Route exact path="/" component={Activity} />
+              <Route exact path="/" component={ActivityModal} />
+            </Container>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
           </div>
-        </Router>         
+        </Router>
       </Provider>
-           
     );
   }
 }

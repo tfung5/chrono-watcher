@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
-import rootReducer from "./reducers";
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
 
 const initialState = {};
 
@@ -13,7 +13,7 @@ const rootEnhancer = composeEnhancers(
     // other store enhancers if any
 );
 
-/** The following setup of the Redux Devtools extension causes the app to not load when the extension is not installed in the browser. The above is the workaround.
+/** The following setup of the Redux Devtools extension causes the app to not load when the extension is not installed in the browser, at least when deployed on Heroku. The above is the workaround.
 
 const store = createStore(
     rootReducer,

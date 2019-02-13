@@ -1,34 +1,60 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { getActivities, deleteActivity } from "../../actions/activityActions";
+
+import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class Activity extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: "",
-            id: "",
-            errors: {}
-        }
-    }
+  componentDidMount() {
+    this.props.getActivities();
+  }
 
-    render() {
-        return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
-                Activity
+  onDeleteClick = id => {
+    this.props.deleteActivity(id);
+  };
 
-                <Input />
-            </div>
-        );
-    }
+  render() {
+    const { activities } = this.props.activity; // Destructuring. Pulling activities from props.activity because on the rootReducer, we have activity: activityReducer. Everything lives under what you call the reducer.
+    return (
+      <Container>
+        <ListGroup>
+          <TransitionGroup className="activities">
+            {activities.map(({ id, name }) => (
+              <CSSTransition key={id} timeout={500} classNames="fade">
+                <ListGroupItem>
+                  <Button
+                    className="remove-btn"
+                    color="danger"
+                    size="sm"
+                    onClick={this.onDeleteClick.bind(this, id)}
+                  >
+                    &times;
+                  </Button>
+                  {name}
+                </ListGroupItem>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </ListGroup>
+      </Container>
+    );
+  }
 }
 
 Activity.propTypes = {
-    activities: PropTypes.object.isRequired
+  activity: PropTypes.object.isRequired,
+  getActivities: PropTypes.func.isRequired,
+  deleteActivity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    activities: state.activities
+  activity: state.activity
 });
 
-export default connect(mapStateToProps)(Activity);
+export default connect(
+  mapStateToProps,
+  { getActivities, deleteActivity }
+)(Activity);
