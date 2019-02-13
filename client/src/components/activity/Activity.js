@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Input from './Input.js';
 
-class Timeline extends Component {
+class Activity extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,13 +12,10 @@ class Timeline extends Component {
         }
     }
 
-    componentDidMount() {
-    }
-
     render() {
         return (
             <div style={{ height: "75vh" }} className="container valign-wrapper">
-                Timeline
+                Activity
 
                 <Input />
             </div>
@@ -27,7 +23,7 @@ class Timeline extends Component {
     }
 }
 
-Timeline.propTypes = {
+Activity.propTypes = {
     activities: PropTypes.object.isRequired
 };
 
@@ -35,4 +31,4 @@ const mapStateToProps = state => ({
     activities: state.activities
 });
 
-export default connect(mapStateToProps)(Timeline);
+export default connect(mapStateToProps)(Activity);

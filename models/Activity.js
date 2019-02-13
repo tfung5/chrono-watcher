@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const TimelineSchema = new Schema({
+const ActivitySchema = new Schema({
     name: {
         type: String,
         required: [true, 'The name is required']
@@ -14,6 +14,6 @@ const TimelineSchema = new Schema({
 });
 
 // Create model
-const Timeline = mongoose.model('timeline', TimelineSchema);
+const Activity = mongoose.model('activity', ActivitySchema);
 
-module.exports = Timeline;
+module.exports = Activity;

@@ -13,7 +13,7 @@ const rootEnhancer = composeEnhancers(
     // other store enhancers if any
 );
 
-/** This setup of the Redux Devtools extension causes the app to not load when the extension is not installed in the browser. The above is the workaround.
+/** The following setup of the Redux Devtools extension causes the app to not load when the extension is not installed in the browser. The above is the workaround.
 
 const store = createStore(
     rootReducer,

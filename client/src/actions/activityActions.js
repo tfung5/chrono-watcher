@@ -4,12 +4,10 @@ import {
     GET_ERRORS
 } from './types/';
 
-const testObject = { hello: 'hi', bye: 'cya' };
-
 // GET_ACTIVITIES
 export const getActivities = (userActivities) => dispatch => {
     axios
-        .get('/api/timeline/activities', userActivities)
+        .get('/api/activities', userActivities)
         .then( res => {
             dispatch({
                 type: GET_ACTIVITIES,
