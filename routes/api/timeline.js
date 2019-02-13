@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // Load Activity model
-const Activity = require('../../models/Activity');
+const Timeline = require('../../models/Timeline');
 
-// Get all activities from the database
+// Get everything from the database
 router.get('/activities', (req, res, next) => {
-    Activity.find( {}, {name: 'name', date: 'date'})
+    Timeline.find( {}, {name: 'name', date: 'date'})
         .then( data => res.json(data) )
         .catch(next)
 });
@@ -15,7 +15,7 @@ router.get('/activities', (req, res, next) => {
 // Or return an error if the input field is empty
 router.post('/activities', (req, res, next) => {
     if (req.body.name) {
-        Activity.create(req.body)
+        Timeline.create(req.body)
             .then( data => res.json(data) )
             .catch(next)
     } else {
@@ -26,7 +26,7 @@ router.post('/activities', (req, res, next) => {
 });
 
 router.delete('/activities/:id', (req, res, next) => {
-    Activity.findOneAndDelete({
+    Timeline.findOneAndDelete({
         "_id": req.params.id
     })
         .then( data => res.json(data) )

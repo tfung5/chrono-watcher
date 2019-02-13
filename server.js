@@ -14,7 +14,7 @@ const db = require('./config/keys').mongoURI;
 
 // Obtain routes
 const users = require('./routes/api/users');
-const activities = require('./routes/api/activities');
+const timeline = require('./routes/api/timeline');
 
 // Bodyparser middleware
 app.use(
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use('/api/users', users);
-app.use('/api/activities', activities);
+app.use('/api/timeline', timeline);
 
 // Connect to MongoDB
 mongoose

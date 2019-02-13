@@ -4,13 +4,17 @@ import PropTypes from 'prop-types';
 import Input from './Input.js';
 
 class Timeline extends Component {
+    constructor() {
+        super();
+        this.state = {
+            name: "",
+            id: "",
+            errors: {}
+        }
+    }
 
-
-    onSubmit = e => {
-        const timelineData = {
-            activities: this.props.activities
-        };
-    };    
+    componentDidMount() {
+    }
 
     render() {
         return (
