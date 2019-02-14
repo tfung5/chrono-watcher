@@ -18,15 +18,15 @@ router.get("/", (req, res, next) => {
 // @desc    Post an activity
 // @access  Public // Should be Private, still working on implementing this
 router.post("/", (req, res, next) => {
-  /*
-    const newActivity = new Activity({
-        name: req.body.name
-    });
-    newActivity.save()
-        .then( data => res.json(data) )
-        .catch(next)
-    */
+  const newActivity = new Activity({
+    name: req.body.name
+  });
+  newActivity
+    .save()
+    .then(data => res.json(data))
+    .catch(next);
 
+  /*
   if (req.body.name) {
     Activity.create(req.body)
       .then(data => res.json(data))
@@ -36,16 +36,16 @@ router.post("/", (req, res, next) => {
       error: "The input field is empty"
     });
   }
+  */
 });
 
 // @route   DELETE api/activities
 // @desc    Delete an activity
 // @access  Public
 router.delete("/:id", (req, res, next) => {
-  Activity.findOneAndDelete({
-    _id: req.params.id
-  })
-    .then(data => res.json(data))
+  Activity.findById(req.params.id)
+    .then(activity => activity.remove())
+    .then(() => res.json({ success: true }))
     .catch(err => res.status(404).json({ success: false }));
 });
 

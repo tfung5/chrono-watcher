@@ -3,28 +3,42 @@ import {
   GET_ACTIVITIES,
   ADD_ACTIVITY,
   DELETE_ACTIVITY,
-  GET_ERRORS
+  ACTIVITIES_LOADING
 } from "./types";
 
 // GET_ACTIVITIES
 
-export const getActivities = () => {
-  return {
-    type: GET_ACTIVITIES
-  };
+export const getActivities = () => dispatch => {
+  dispatch(setActivitiesLoading());
+  axios.get("/api/activities").then(res =>
+    dispatch({
+      type: GET_ACTIVITIES,
+      payload: res.data
+    })
+  );
 };
 
-export const addActivity = newActivity => {
-  return {
-    type: ADD_ACTIVITY,
-    payload: newActivity
-  };
+export const addActivity = newActivity => dispatch => {
+  axios.post("/api/activities", newActivity).then(res =>
+    dispatch({
+      type: ADD_ACTIVITY,
+      payload: res.data
+    })
+  );
 };
 
-export const deleteActivity = id => {
+export const deleteActivity = id => dispatch => {
+  axios.delete(`/api/activities/${id}`).then(res =>
+    dispatch({
+      type: DELETE_ACTIVITY,
+      payload: id
+    })
+  );
+};
+
+export const setActivitiesLoading = () => {
   return {
-    type: DELETE_ACTIVITY,
-    payload: id
+    type: ACTIVITIES_LOADING
   };
 };
 

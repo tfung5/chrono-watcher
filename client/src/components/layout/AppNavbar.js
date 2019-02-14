@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import {
   Collapse,
   Navbar,
@@ -44,8 +43,4 @@ class AppNavbar extends Component {
   }
 }
 
-AppNavbar.propTypes = {};
-
-const mapStateToProps = state => {};
-
-export default connect(mapStateToProps)(AppNavbar);
+export default connect()(AppNavbar);

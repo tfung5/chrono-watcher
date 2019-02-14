@@ -12,7 +12,6 @@ import {
   Input
 } from "reactstrap";
 import { addActivity } from "../../actions/activityActions";
-import uuid from "uuid";
 
 class ActivityModal extends Component {
   state = {
@@ -35,7 +34,6 @@ class ActivityModal extends Component {
   onSubmit = e => {
     e.preventDefault();
     const newActivity = {
-      id: uuid(),
       name: this.state.name
     };
 
@@ -51,7 +49,11 @@ class ActivityModal extends Component {
       <div>
         <Button
           color="dark"
-          style={{ marginBottom: "2rem" }}
+          style={{
+            marginBottom: "2rem",
+            marginTop: "2rem",
+            marginLeft: "1rem"
+          }}
           onClick={this.toggle}
         >
           Add Activity
@@ -82,7 +84,7 @@ class ActivityModal extends Component {
 }
 
 ActivityModal.propTypes = {
-  activities: PropTypes.object.isRequired,
+  activity: PropTypes.object.isRequired,
   addActivity: PropTypes.func.isRequired
 };
 

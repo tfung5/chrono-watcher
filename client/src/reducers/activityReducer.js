@@ -1,24 +1,22 @@
 import {
   GET_ACTIVITIES,
   ADD_ACTIVITY,
-  DELETE_ACTIVITY
+  DELETE_ACTIVITY,
+  ACTIVITIES_LOADING
 } from "../actions/types";
-import uuid from "uuid";
 
 const initialState = {
-  activities: [
-    { id: uuid(), name: "Ate breakfast" },
-    { id: uuid(), name: "Ate lunch" },
-    { id: uuid(), name: "Ate dinner" },
-    { id: uuid(), name: "Ate snack" }
-  ]
+  activities: [],
+  loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ACTIVITIES:
       return {
-        ...state
+        ...state,
+        activities: action.payload,
+        loading: false
       };
     case ADD_ACTIVITY:
       return {
@@ -29,8 +27,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activities: state.activities.filter(
-          activity => activity.id !== action.payload
+          activity => activity._id !== action.payload
         )
+      };
+    case ACTIVITIES_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;
