@@ -8,35 +8,28 @@ class Dashboard extends Component {
     e.preventDefault();
     this.props.logoutUser();
   };
+
   render() {
     const { user } = this.props.auth;
-
     return (
-      <div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ textAlign: "center" }}>
+      <div style={{ height: "75vh" }} className="container valign-wrapper">
+        <div className="row">
+          <div className="col s12 center-align">
             <h4>
               <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p>
-                You are logged into a full-stack MERN app
-                <span role="img" aria-label="clap">
-                  👏
-                </span>
+              <p className="flow-text grey-text text-darken-1">
+                You are logged into a full-stack{" "}
+                <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
               </p>
-              <p>Your email is: </p>
-              {user.email}
             </h4>
             <button
               style={{
                 width: "150px",
                 borderRadius: "3px",
-                borderColor: "black",
                 letterSpacing: "1.5px",
-                marginTop: "1rem",
-                marginBottom: "1rem"
+                marginTop: "1rem"
               }}
               onClick={this.onLogoutClick}
-              className="btn"
             >
               Logout
             </button>

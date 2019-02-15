@@ -28,13 +28,13 @@ class Register extends Component {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
-      })
+      });
     }
   }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
-    };
+  };
   onSubmit = e => {
     e.preventDefault();
     const newUser = {
@@ -48,7 +48,7 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-  return (
+    return (
       <div className="container">
         <div style={{ marginTop: "4em" }} className="row">
           <div className="col s8 offset-s2">
@@ -154,4 +154,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps,{ registerUser })(withRouter(Register));
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));

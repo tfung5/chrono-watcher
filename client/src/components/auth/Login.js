@@ -15,37 +15,37 @@ class Login extends Component {
     };
   }
 
-componentDidMount() {
-  //If user already logged in and navigates to Register page, will be redirected to dashboard
-  if (this.props.auth.isAuthenticated) {
-    this.props.history.push("/dashboard");
-  }
-}
-
-componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard"); // push user to dashboard when they login
+  componentDidMount() {
+    //If user already logged in and navigates to Register page, will be redirected to home
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
     }
-if (nextProps.errors) {
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/"); // push user to home when they login
+    }
+    if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
     }
   }
-onChange = e => {
+  onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-onSubmit = e => {
+  onSubmit = e => {
     e.preventDefault();
-const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
-this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
-render() {
+  render() {
     const { errors } = this.state;
-return (
+    return (
       <div className="container">
         <div style={{ marginTop: "4em" }} className="row">
           <div className="col s8 offset-s2">
@@ -122,11 +122,14 @@ Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
-})
+});
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

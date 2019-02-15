@@ -5,11 +5,14 @@ const Schema = mongoose.Schema;
 const ActivitySchema = new Schema({
   name: {
     type: String,
-    required: [true, "The name is required"]
+    required: [true, "The activity name is required"]
   },
   date: {
     type: Date,
     default: Date.now
+  },
+  email: {
+    type: String
   }
 });
 

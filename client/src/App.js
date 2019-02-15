@@ -11,15 +11,12 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
-//import Landing from "./components/layout/Landing";
 import AppNavbar from "./components/layout/AppNavbar";
-//import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Activity from "./components/activity/Activity";
-import ActivityModal from "./components/activity/ActivityModal";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -50,7 +47,6 @@ class App extends Component {
             <AppNavbar />
             <Container>
               <Route exact path="/" component={Activity} />
-              <Route exact path="/" component={ActivityModal} />
             </Container>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />

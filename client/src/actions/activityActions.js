@@ -3,10 +3,9 @@ import {
   GET_ACTIVITIES,
   ADD_ACTIVITY,
   DELETE_ACTIVITY,
-  ACTIVITIES_LOADING
+  ACTIVITIES_LOADING,
+  GET_ERRORS
 } from "./types";
-
-// GET_ACTIVITIES
 
 export const getActivities = () => dispatch => {
   dispatch(setActivitiesLoading());
@@ -19,12 +18,20 @@ export const getActivities = () => dispatch => {
 };
 
 export const addActivity = newActivity => dispatch => {
-  axios.post("/api/activities", newActivity).then(res =>
-    dispatch({
-      type: ADD_ACTIVITY,
-      payload: res.data
-    })
-  );
+  axios
+    .post("/api/activities", newActivity)
+    .then(res =>
+      dispatch({
+        type: ADD_ACTIVITY,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 export const deleteActivity = id => dispatch => {
@@ -41,22 +48,3 @@ export const setActivitiesLoading = () => {
     type: ACTIVITIES_LOADING
   };
 };
-
-/* Will be used when linking front end to back end
-export const getActivities = (userActivities) => dispatch => {
-    axios
-        .get('/api/activities', userActivities)
-        .then( res => {
-            dispatch({
-                type: GET_ACTIVITIES,
-                payload: userActivities
-            })
-        })
-        .catch( err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        )
-}
-*/
