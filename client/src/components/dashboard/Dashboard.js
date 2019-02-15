@@ -23,14 +23,10 @@ class Dashboard extends Component {
           <div style={{ textAlign: "center" }}>
             <h4>
               <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p>
-                You are logged into a full-stack MERN app
-                <span role="img" aria-label="clap">
-                  👏
-                </span>
-              </p>
+              <b>!</b>
+              <p>You are now logged into Chrono Watcher!</p>
               <p>Your email is: </p>
-              {user.email}
+              <span style={{ color: "#66ccff" }}>{user.email}</span>
             </h4>
             <button
               style={{

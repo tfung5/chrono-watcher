@@ -19,7 +19,8 @@ class Landing extends Component {
               width: "150px",
               borderRadius: "3px",
               borderColor: "black",
-              letterSpacing: "1.5px"
+              letterSpacing: "1.5px",
+              backgroundColor: "#ff6666"
             }}
             className="btn btn-large waves-effect waves-light hoverable blue accent-3"
           >
@@ -32,7 +33,8 @@ class Landing extends Component {
               width: "150px",
               borderRadius: "3px",
               borderColor: "black",
-              letterSpacing: "1.5px"
+              letterSpacing: "1.5px",
+              backgroundColor: "#66ccff"
             }}
             className="btn btn-large waves-effect white hoverable black-text"
           >

@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
+import { Button, Container, Form, FormGroup, Label, Input } from "reactstrap";
+
 class Register extends Component {
   constructor() {
     super();
@@ -49,23 +51,70 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="container">
-        <div style={{ marginTop: "4em" }} className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
+      <Container>
+        <FormGroup>
+          <Label for="name" />
+          <Input
+            onChange={this.onChange}
+            value={this.state.name}
+            error={errors.name}
+            id="name"
+            type="text"
+            className={classnames("", {
+              invalid: errors.name
+            })}
+            placeholder="Name"
+            style={{
+              width: "20rem"
+            }}
+          />
+
+          <Input
+            onChange={this.onChange}
+            value={this.state.name}
+            error={errors.name}
+            id="name"
+            type="text"
+            className={classnames("", {
+              invalid: errors.name
+            })}
+          />
+          <Input
+            onChange={this.onChange}
+            value={this.state.name}
+            error={errors.name}
+            id="name"
+            type="text"
+            className={classnames("", {
+              invalid: errors.name
+            })}
+          />
+          <Input
+            onChange={this.onChange}
+            value={this.state.name}
+            error={errors.name}
+            id="name"
+            type="text"
+            className={classnames("", {
+              invalid: errors.name
+            })}
+          />
+        </FormGroup>
+        <div style={{ marginTop: "4em" }}>
+          <div>
+            <Link to="/">
+              <i>keyboard_backspace</i> Back to home
             </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+            <div style={{ paddingLeft: "11.250px" }}>
               <h4>
                 <b>Register</b> below
               </h4>
-              <p className="grey-text text-darken-1">
+              <p>
                 Already have an account? <Link to="/login">Log in</Link>
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+              <div>
                 <input
                   onChange={this.onChange}
                   value={this.state.name}
@@ -77,9 +126,9 @@ class Register extends Component {
                   })}
                 />
                 <label htmlFor="name">Name</label>
-                <span className="red-text">{errors.name}</span>
+                <span>{errors.name}</span>
               </div>
-              <div className="input-field col s12">
+              <div>
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
@@ -91,9 +140,9 @@ class Register extends Component {
                   })}
                 />
                 <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.email}</span>
+                <span>{errors.email}</span>
               </div>
-              <div className="input-field col s12">
+              <div>
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
@@ -105,9 +154,9 @@ class Register extends Component {
                   })}
                 />
                 <label htmlFor="password">Password</label>
-                <span className="red-text">{errors.password}</span>
+                <span>{errors.password}</span>
               </div>
-              <div className="input-field col s12">
+              <div>
                 <input
                   onChange={this.onChange}
                   value={this.state.password2}
@@ -119,9 +168,9 @@ class Register extends Component {
                   })}
                 />
                 <label htmlFor="password2">Confirm Password</label>
-                <span className="red-text">{errors.password2}</span>
+                <span>{errors.password2}</span>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <div style={{ paddingLeft: "11.250px" }}>
                 <button
                   style={{
                     width: "150px",
@@ -138,7 +187,7 @@ class Register extends Component {
             </form>
           </div>
         </div>
-      </div>
+      </Container>
     );
   }
 }

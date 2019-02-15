@@ -26,10 +26,16 @@ class AppNavbar extends Component {
   render() {
     return (
       <div>
-        <Navbar color="dark" dark expand="sm" className="mb-5">
+        <Navbar
+          expand="sm"
+          className="mb-5"
+          style={{
+            backgroundColor: "#66ccff"
+          }}
+        >
           <Container>
             <NavbarBrand>
-              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              <Link to="/" style={{ textDecoration: "none", color: "#000" }}>
                 Chrono Watcher
               </Link>
             </NavbarBrand>
@@ -42,7 +48,7 @@ class AppNavbar extends Component {
                     target="_blank"
                     style={{
                       textDecoration: "none",
-                      color: "white"
+                      color: "#000"
                     }}
                   >
                     GitHub

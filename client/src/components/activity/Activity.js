@@ -10,6 +10,8 @@ import {
 } from "../../actions/activityActions";
 import { logoutUser } from "../../actions/authActions";
 
+import moment from "moment";
+
 import {
   Button,
   Container,
@@ -72,17 +74,10 @@ class Activity extends Component {
     this.props.deleteActivity(id);
   };
 
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-    this.refreshActivities();
-  };
+  convertToHHMM = date => {
+    var newDate = moment(date).format("hh:mm A");
 
-  refreshActivities = () => {
-    const currentUser = {
-      email: undefined
-    };
-    this.props.getActivities(currentUser);
+    return newDate;
   };
 
   // Displays dashboard only if there is a logged in user
@@ -114,28 +109,44 @@ class Activity extends Component {
               onChange={this.onChange}
               style={{ marginTop: "-1rem" }}
             />
-            <div style={{ marginTop: "1rem", color: "red" }}>{errors.name}</div>
+            <div style={{ marginTop: "1rem", color: "#66ccff" }}>
+              {errors.name}
+            </div>
             <Button
-              color="dark"
-              style={{ marginTop: "1rem", marginBottom: "4rem" }}
+              style={{
+                marginTop: "1rem",
+                marginBottom: "4rem",
+                color: "#000",
+                backgroundColor: "#66ccff"
+              }}
               block
             >
               Add Activity
             </Button>
             <ListGroup>
               <TransitionGroup className="activities">
-                {activities.map(({ _id, name }) => (
+                {activities.map(({ _id, name, date }) => (
                   <CSSTransition key={_id} timeout={500} classNames="fade">
                     <ListGroupItem>
                       <Button
                         className="remove-btn"
-                        color="danger"
+                        style={{
+                          backgroundColor: "#66ccff"
+                        }}
                         size="sm"
                         onClick={this.onDeleteClick.bind(this, _id)}
                       >
                         &times;
                       </Button>
-                      {name}
+                      <span
+                        style={{
+                          margin: "0 1rem 0 1rem",
+                          color: "#66ccff"
+                        }}
+                      >
+                        {this.convertToHHMM(date)}
+                      </span>{" "}
+                      <span>{name}</span>
                     </ListGroupItem>
                   </CSSTransition>
                 ))}
