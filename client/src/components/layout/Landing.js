@@ -7,6 +7,15 @@ class Landing extends Component {
       <div>
         <div
           style={{
+            textAlign: "center",
+            marginTop: "4rem",
+            marginBottom: "-3rem"
+          }}
+        >
+          <h2>Welcome!</h2>
+        </div>
+        <div
+          style={{
             display: "flex",
             justifyContent: "center",
             alignContent: "center",
@@ -22,7 +31,7 @@ class Landing extends Component {
               letterSpacing: "1.5px",
               backgroundColor: "#ff6666"
             }}
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+            className="btn"
           >
             Register
           </Link>
@@ -36,7 +45,7 @@ class Landing extends Component {
               letterSpacing: "1.5px",
               backgroundColor: "#66ccff"
             }}
-            className="btn btn-large waves-effect white hoverable black-text"
+            className="btn"
           >
             Log In
           </Link>

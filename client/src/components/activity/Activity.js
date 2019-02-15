@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import {
   getActivities,
   addActivity,
-  deleteActivity,
-  clearErrors
+  deleteActivity
 } from "../../actions/activityActions";
+import { clearErrors } from "../../actions/errorActions";
 import { logoutUser } from "../../actions/authActions";
 
 import moment from "moment";
@@ -32,6 +32,7 @@ class Activity extends Component {
     super();
     this.state = {
       name: "",
+      date: Date.now,
       errors: {}
     };
   }
@@ -61,7 +62,8 @@ class Activity extends Component {
     e.preventDefault();
     const newActivity = {
       name: this.state.name,
-      email: this.props.auth.user.email
+      email: this.props.auth.user.email,
+      date: this.state.date
     };
     this.props.addActivity(newActivity);
     this.props.clearErrors();
@@ -90,6 +92,24 @@ class Activity extends Component {
     }
   };
 
+  displayTimeInput = () => {
+    const { errors } = this.state;
+    return (
+      <div>
+        <Label for="date" />
+        <Input
+          type="text"
+          value={this.state.date}
+          id="date"
+          error={errors.name}
+          placeholder="When did you finish?"
+          onChange={this.onChange}
+          style={{ marginTop: "-1rem" }}
+        />
+      </div>
+    );
+  };
+
   render() {
     const { activities } = this.props.activity; // Destructuring. Pulling activities from props.activity because on the rootReducer, we have activity: activityReducer. Everything lives under what you call the reducer.
     const { errors } = this.state;
@@ -99,7 +119,7 @@ class Activity extends Component {
         {this.displayDashboard()}
         <Form noValidate onSubmit={this.onSubmit}>
           <FormGroup>
-            <Label for="activity" />
+            <Label for="name" />
             <Input
               type="text"
               value={this.state.name}
@@ -124,7 +144,7 @@ class Activity extends Component {
               Add Activity
             </Button>
             <ListGroup>
-              <TransitionGroup className="activities">
+              <TransitionGroup>
                 {activities.map(({ _id, name, date }) => (
                   <CSSTransition key={_id} timeout={500} classNames="fade">
                     <ListGroupItem>

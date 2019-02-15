@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-import classnames from "classnames";
+import { clearErrors } from "../../actions/errorActions";
 
 import { Button, Container, Form, FormGroup, Label, Input } from "reactstrap";
 
@@ -20,9 +20,9 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    //If user already logged in and navigates to Register page, will be redirected to dashboard
+    //If user already logged in and navigates to Register page, will be redirected to homepage
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
   }
 
@@ -37,6 +37,7 @@ class Register extends Component {
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   onSubmit = e => {
     e.preventDefault();
     const newUser = {
@@ -45,157 +46,140 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    this.props.registerUser(newUser, this.props.history);
+    this.props.registerUser(newUser, this.props.history); // Since we handle the redirect within the action, we do need to pass in this.props.history. withRouter is necessary for this.
+    this.props.clearErrors();
   };
 
   render() {
     const { errors } = this.state;
+    const lightRed = "#ff6666";
+    const inputFieldWidth = "45%";
     return (
-      <Container>
-        <FormGroup>
-          <Label for="name" />
-          <Input
-            onChange={this.onChange}
-            value={this.state.name}
-            error={errors.name}
-            id="name"
-            type="text"
-            className={classnames("", {
-              invalid: errors.name
-            })}
-            placeholder="Name"
-            style={{
-              width: "20rem"
-            }}
-          />
+      <Container style={{ marginLeft: "10rem" }}>
+        <p>
+          <Link to="/">Back to home</Link>
+        </p>
+        <h4>
+          <b>Register</b> below
+        </h4>
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
 
-          <Input
-            onChange={this.onChange}
-            value={this.state.name}
-            error={errors.name}
-            id="name"
-            type="text"
-            className={classnames("", {
-              invalid: errors.name
-            })}
-          />
-          <Input
-            onChange={this.onChange}
-            value={this.state.name}
-            error={errors.name}
-            id="name"
-            type="text"
-            className={classnames("", {
-              invalid: errors.name
-            })}
-          />
-          <Input
-            onChange={this.onChange}
-            value={this.state.name}
-            error={errors.name}
-            id="name"
-            type="text"
-            className={classnames("", {
-              invalid: errors.name
-            })}
-          />
-        </FormGroup>
-        <div style={{ marginTop: "4em" }}>
-          <div>
-            <Link to="/">
-              <i>keyboard_backspace</i> Back to home
-            </Link>
-            <div style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Register</b> below
-              </h4>
-              <p>
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div>
-                <input
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  error={errors.name}
-                  id="name"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
-                />
-                <label htmlFor="name">Name</label>
-                <span>{errors.name}</span>
-              </div>
-              <div>
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span>{errors.email}</span>
-              </div>
-              <div>
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
-                />
-                <label htmlFor="password">Password</label>
-                <span>{errors.password}</span>
-              </div>
-              <div>
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password2}
-                  error={errors.password2}
-                  id="password2"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
-                />
-                <label htmlFor="password2">Confirm Password</label>
-                <span>{errors.password2}</span>
-              </div>
-              <div style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Sign up
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <Form onSubmit={this.onSubmit} style={{ width: "50rem" }}>
+          <FormGroup style={{ display: "flex" }}>
+            <Label for="name" />
+            <Input
+              id="name"
+              type="text"
+              placeholder="Name"
+              value={this.state.name}
+              onChange={this.onChange}
+              error={errors.name}
+              style={{
+                width: inputFieldWidth
+              }}
+            />
+            <span
+              style={{
+                marginLeft: "1rem",
+                color: lightRed
+              }}
+            >
+              {errors.name}
+            </span>
+          </FormGroup>
+          <FormGroup style={{ display: "flex" }}>
+            <Label for="email" />
+            <Input
+              id="email"
+              type="email"
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.onChange}
+              error={errors.name}
+              style={{
+                width: inputFieldWidth
+              }}
+            />
+            <span
+              style={{
+                marginLeft: "1rem",
+                color: lightRed
+              }}
+            >
+              {errors.email}
+            </span>
+          </FormGroup>
+          <FormGroup style={{ display: "flex" }}>
+            <Label for="password" />
+            <Input
+              id="password"
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.onChange}
+              error={errors.name}
+              style={{
+                width: inputFieldWidth
+              }}
+            />
+            <span
+              style={{
+                marginLeft: "1rem",
+                color: lightRed
+              }}
+            >
+              {errors.password}
+            </span>
+          </FormGroup>
+          <FormGroup style={{ display: "flex" }}>
+            <Label for="password2" />
+            <Input
+              id="password2"
+              type="password"
+              placeholder="Confirm Password"
+              value={this.state.password2}
+              onChange={this.onChange}
+              error={errors.name}
+              style={{
+                width: inputFieldWidth
+              }}
+            />
+            <span
+              style={{
+                marginLeft: "1rem",
+                color: lightRed
+              }}
+            >
+              {errors.password2}
+            </span>
+          </FormGroup>
+
+          <Button
+            type="submit"
+            style={{
+              marginTop: "1rem",
+              marginBottom: "4rem",
+              color: "#000",
+              backgroundColor: lightRed,
+              width: inputFieldWidth
+            }}
+            block
+          >
+            Sign Up
+          </Button>
+        </Form>
       </Container>
     );
   }
 }
 
 Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -205,5 +189,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, clearErrors }
 )(withRouter(Register));

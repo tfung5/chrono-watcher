@@ -9,7 +9,7 @@ module.exports = function validateActivityInput(data) {
 
   // Check for name
   if (Validator.isEmpty(data.name)) {
-    errors.name = "Have you done nothing? Enter something!";
+    errors.name = "Enter something!";
   }
 
   return {

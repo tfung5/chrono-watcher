@@ -16,17 +16,22 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
+    const lightBlue = "#66ccff";
+    const lightRed = "#ff6666";
 
     return (
       <div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div style={{ textAlign: "center" }}>
             <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
+              <b>Hey there,</b>{" "}
+              <span style={{ color: lightBlue }}>
+                {user.name.split(" ")[0]}
+              </span>
               <b>!</b>
               <p>You are now logged into Chrono Watcher!</p>
               <p>Your email is: </p>
-              <span style={{ color: "#66ccff" }}>{user.email}</span>
+              <span style={{ color: lightBlue }}>{user.email}</span>
             </h4>
             <button
               style={{
@@ -35,7 +40,8 @@ class Dashboard extends Component {
                 borderColor: "black",
                 letterSpacing: "1.5px",
                 marginTop: "1rem",
-                marginBottom: "1rem"
+                marginBottom: "1rem",
+                backgroundColor: lightRed
               }}
               onClick={this.onLogoutClick}
               className="btn"

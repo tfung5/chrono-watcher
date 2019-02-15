@@ -38,7 +38,8 @@ router.post("/", (req, res, next) => {
   if (req.body.name) {
     const newActivity = new Activity({
       name: req.body.name,
-      email: req.body.email
+      email: req.body.email,
+      date: req.body.date
     });
     newActivity
       .save()

@@ -4,8 +4,7 @@ import {
   ADD_ACTIVITY,
   DELETE_ACTIVITY,
   ACTIVITIES_LOADING,
-  GET_ERRORS,
-  CLEAR_ERRORS
+  GET_ERRORS
 } from "./types";
 
 export const getActivities = currentUser => dispatch => {
@@ -51,11 +50,5 @@ export const deleteActivity = id => dispatch => {
 export const setActivitiesLoading = () => {
   return {
     type: ACTIVITIES_LOADING
-  };
-};
-
-export const clearErrors = () => {
-  return {
-    type: CLEAR_ERRORS
   };
 };
