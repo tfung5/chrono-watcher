@@ -8,12 +8,8 @@ class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
-    this.refreshActivities();
-  };
-
-  refreshActivities = () => {
     const currentUser = {
-      email: undefined
+      email: undefined // This was key in refreshing the list of activities upon logging out.
     };
     this.props.getActivities(currentUser);
   };
