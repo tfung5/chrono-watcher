@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -27,12 +28,25 @@ class AppNavbar extends Component {
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand href="/">Chrono Watcher</NavbarBrand>
+            <NavbarBrand>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                Chrono Watcher
+              </Link>
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="https://www.github.com/tfung5">Github</NavLink>
+                  <NavLink
+                    href="https://www.github.com/tfung5"
+                    target="_blank"
+                    style={{
+                      textDecoration: "none",
+                      color: "white"
+                    }}
+                  >
+                    GitHub
+                  </NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
