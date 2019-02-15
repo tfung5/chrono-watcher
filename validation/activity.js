@@ -7,9 +7,9 @@ module.exports = function validateActivityInput(data) {
   // Convert empty fields to empty strings so validator functions can be used
   data.name = !isEmpty(data.name) ? data.name : "";
 
-  // Activity check
+  // Check for name
   if (Validator.isEmpty(data.name)) {
-    errors.name = "Have you done nothing? Type in something!";
+    errors.name = "Have you done nothing? Enter something!";
   }
 
   return {

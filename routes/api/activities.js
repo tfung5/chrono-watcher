@@ -1,5 +1,9 @@
-const express = require("express");
-const router = express.Router();
+var express = require("express");
+var app = express();
+var bodyParser = require("body-parser");
+var router = express.Router();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Load activity validation
 const validateActivityInput = require("../../validation/activity");
@@ -12,7 +16,7 @@ const Activity = require("../../models/Activity");
 // @desc    Get all activities
 // @access  Public
 router.get("/", (req, res, next) => {
-  Activity.find()
+  Activity.find({ email: req.query.email })
     .sort({ date: -1 })
     .then(data => res.json(data))
     .catch(next);
@@ -21,7 +25,7 @@ router.get("/", (req, res, next) => {
 // addActivity endpoint
 // @route   POST api/activities
 // @desc    Post an activity
-// @access  Public // Should be Private, still working on implementing this
+// @access  Public
 router.post("/", (req, res, next) => {
   // Form validation
   const { errors, isValid } = validateActivityInput(req.body);
@@ -39,7 +43,7 @@ router.post("/", (req, res, next) => {
     newActivity
       .save()
       .then(data => res.json(data))
-      .catch(next);
+      .catch(err => console.log(err));
   }
 }); // End addActivity endpoint
 

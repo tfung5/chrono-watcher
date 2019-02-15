@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 import {
   getActivities,
   addActivity,
-  deleteActivity
+  deleteActivity,
+  clearErrors
 } from "../../actions/activityActions";
 import { logoutUser } from "../../actions/authActions";
 
@@ -25,11 +26,20 @@ import Landing from "../layout/Landing";
 import Dashboard from "../dashboard/Dashboard";
 
 class Activity extends Component {
-  state = {
-    name: "",
-    email: "",
-    errors: {}
-  };
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      errors: {}
+    };
+  }
+
+  componentDidMount() {
+    const currentUser = {
+      email: this.props.auth.user.email
+    };
+    this.props.getActivities(currentUser);
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -41,7 +51,7 @@ class Activity extends Component {
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.id]: e.target.value
     });
   };
 
@@ -52,15 +62,11 @@ class Activity extends Component {
       email: this.props.auth.user.email
     };
     this.props.addActivity(newActivity);
+    this.props.clearErrors();
     this.setState({
-      name: "",
-      errors: {}
+      name: ""
     });
   };
-
-  componentDidMount() {
-    this.props.getActivities();
-  }
 
   onDeleteClick = id => {
     this.props.deleteActivity(id);
@@ -69,9 +75,14 @@ class Activity extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
-    this.setState({
-      email: ""
-    });
+    this.refreshActivities();
+  };
+
+  refreshActivities = () => {
+    const currentUser = {
+      email: undefined
+    };
+    this.props.getActivities(currentUser);
   };
 
   // Displays dashboard only if there is a logged in user
@@ -91,13 +102,13 @@ class Activity extends Component {
     return (
       <Container>
         {this.displayDashboard()}
-        <Form onSubmit={this.onSubmit}>
+        <Form noValidate onSubmit={this.onSubmit}>
           <FormGroup>
             <Label for="activity" />
             <Input
               type="text"
-              name="name"
-              id="activity"
+              value={this.state.name}
+              id="name"
               error={errors.name}
               placeholder="What have you been up to?"
               onChange={this.onChange}
@@ -143,7 +154,8 @@ Activity.propTypes = {
   errors: PropTypes.object.isRequired,
   getActivities: PropTypes.func.isRequired,
   addActivity: PropTypes.func.isRequired,
-  deleteActivity: PropTypes.func.isRequired
+  deleteActivity: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -154,5 +166,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getActivities, addActivity, deleteActivity, logoutUser }
+  { getActivities, addActivity, deleteActivity, logoutUser, clearErrors }
 )(Activity);

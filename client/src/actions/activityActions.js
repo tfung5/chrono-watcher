@@ -4,17 +4,22 @@ import {
   ADD_ACTIVITY,
   DELETE_ACTIVITY,
   ACTIVITIES_LOADING,
-  GET_ERRORS
+  GET_ERRORS,
+  CLEAR_ERRORS
 } from "./types";
 
-export const getActivities = () => dispatch => {
+export const getActivities = currentUser => dispatch => {
   dispatch(setActivitiesLoading());
-  axios.get("/api/activities").then(res =>
-    dispatch({
-      type: GET_ACTIVITIES,
-      payload: res.data
+  axios
+    .get("/api/activities", {
+      params: { email: currentUser.email }
     })
-  );
+    .then(res =>
+      dispatch({
+        type: GET_ACTIVITIES,
+        payload: res.data
+      })
+    );
 };
 
 export const addActivity = newActivity => dispatch => {
@@ -46,5 +51,11 @@ export const deleteActivity = id => dispatch => {
 export const setActivitiesLoading = () => {
   return {
     type: ACTIVITIES_LOADING
+  };
+};
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
   };
 };

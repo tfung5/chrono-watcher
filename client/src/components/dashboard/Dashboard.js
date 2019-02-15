@@ -2,12 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logoutUser } from "../../actions/authActions";
+import { getActivities } from "../../actions/activityActions";
 
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
+    this.refreshActivities();
   };
+
+  refreshActivities = () => {
+    const currentUser = {
+      email: undefined
+    };
+    this.props.getActivities(currentUser);
+  };
+
   render() {
     const { user } = this.props.auth;
 
@@ -49,6 +59,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
+  getActivities: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
@@ -58,5 +69,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, getActivities }
 )(Dashboard);
