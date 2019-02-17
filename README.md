@@ -9,7 +9,7 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Significant credits go to the following two tutorials where I learned this material:
+## Significant credits go to the following two tutorials where I learned this material:
 
 Brad Traversy - https://www.youtube.com/playlist?list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE
 
