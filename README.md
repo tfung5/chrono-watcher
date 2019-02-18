@@ -1,13 +1,13 @@
 # chrono-watcher
 This is an activity logger that I created to keep track of how I spend my time. I already do something like this daily using an Excel spreadsheet, and I thought it would be fun to try to make a web app version of it. This is built using the MERN stack.
 
-## Available Scripts
+## Install Scripts
 
 In the project directory, assuming you have Node installed, you can run:
 
 ### `npm install && npm client-install && npm run dev`
 
-Runs the app in the development mode.<br>
+This installs dependencies and runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Viewable at:
