@@ -39,7 +39,7 @@ class AppNavbar extends Component {
                 Chrono Watcher
               </Link>
             </NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            <NavbarToggler onClick={this.toggle}>Menu</NavbarToggler>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
