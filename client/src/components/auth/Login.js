@@ -54,7 +54,7 @@ class Login extends Component {
     const lightBlue = "#66ccff";
     const inputFieldWidth = "45%";
     return (
-      <Container style={{ marginLeft: "10rem" }}>
+      <Container style={{ marginLeft: "5%" }}>
         <p>
           <Link to="/">Back to home</Link>
         </p>

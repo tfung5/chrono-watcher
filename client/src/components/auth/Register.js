@@ -55,7 +55,7 @@ class Register extends Component {
     const lightRed = "#ff6666";
     const inputFieldWidth = "45%";
     return (
-      <Container style={{ marginLeft: "10rem" }}>
+      <Container style={{ marginLeft: "5%" }}>
         <p>
           <Link to="/">Back to home</Link>
         </p>
