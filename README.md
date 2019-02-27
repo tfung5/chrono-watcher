@@ -1,5 +1,5 @@
 # Chrono Watcher
-This is an activity logger that I created to keep track of how I spend my time. I already do something like this daily using an Excel spreadsheet, and I thought it would be fun to try to make a web app version of it. This is built using the MERN stack.
+This is an activity logger that I created to keep track of how I spend my time. I already do something like this daily using an Excel spreadsheet, and I thought it would be fun to try to make a web app version of it. This is built using MongoDB, Express, ReactJS, ReduxJS, and NodeJS, as well as Axios and PassportJS.
 
 ## Install Scripts
 
