@@ -1,4 +1,4 @@
 module.exports = {
-    mongoURI: "mongodb://admin:chrono123@ds123635.mlab.com:23635/chrono-watcher",
-    secretOrKey: "secret"
-  };
+  mongoURI: "mongodb://admin:chrono123@ds015760.mlab.com:15760/chrono-watcher2",
+  secretOrKey: "secret"
+};
