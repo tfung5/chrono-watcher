@@ -26,7 +26,7 @@ class Dashboard extends Component {
             <h4>
               <b>Hey there,</b>{" "}
               <span style={{ color: lightBlue }}>
-                {user.name.split(" ")[0]}
+                {user && user.name && user.name.split(" ")[0]}
               </span>
               <b>!</b>
               <p>You are now logged into Chrono Watcher!</p>
